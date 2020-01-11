@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/github/workflow/status/microcompiler/tinyclr-github/Build%20CI?style=flat-square)](https://github.com/microcompiler/tinyclr-github/actions)
 
 This repo contains a sample Visual Studio project leveraging github actions to build and publish TinyCLR OS libraries.  Automated action features include:
-ssss
+
 * Continious build action
 * Release and publish action
 * [Symbol Packages](https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages-snupkg) allowing an improved debugging experience
@@ -13,7 +13,7 @@ ssss
 
 ## Github Actions
 
-* Continuous Integration (CI) Build Action - [.github/workflows/commit.yml](https://github.com/microcompiler/tinyclr-github/blob/master/.github/workflows/build.yml)
+* Continuous Integration (CI) Build Action - [.github/workflows/build.yml](https://github.com/microcompiler/tinyclr-github/blob/master/.github/workflows/build.yml)
 
 * Release and Publish Action - [.github/workflows/release.yml](https://github.com/microcompiler/tinyclr-github/blob/master/.github/workflows/release.yml)
 
@@ -33,7 +33,7 @@ ssss
     <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     <Authors>Microcompiler</Authors>
     <Company>$(AssemblyCompany)</Company>
-    <Description>Simple TinyCLR Calculator Library</Description>
+    <Description>Simple TinyCLR Cube Library</Description>
     <PackageTags>TinyCLR, firmware, iot</PackageTags>
     <PackageProjectUrl>https://github.com/microcompiler/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/microcompiler/tinyclr</RepositoryUrl>
