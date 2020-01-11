@@ -11,9 +11,9 @@ This repo contains a sample Visual Studio project leveraging github actions to b
 
 ## Github Actions
 
-* Continuous Integration (CI) Build Action - [.github/workflows/commit.yml](https://github.com/microcompiler/tinyclr/blob/master/.github/workflows/build.yml)
+* Continuous Integration (CI) Build Action - [.github/workflows/commit.yml](https://github.com/microcompiler/tinyclr-github/blob/master/.github/workflows/build.yml)
 
-* Release and Publish Action - [.github/workflows/release.yml](https://github.com/microcompiler/tinyclr/blob/master/.github/workflows/release.yml)
+* Release and Publish Action - [.github/workflows/release.yml](https://github.com/microcompiler/tinyclr-github/blob/master/.github/workflows/release.yml)
 
 ## Required CSPROJ file settings
 
