@@ -1,10 +1,12 @@
 # Sample TinyCLR Project
 
-This repo contains a sample Visual Studio project leveraging github actions to build and publish TinyCLR OS libraries.  Automated action features include:
+[![Build Status](https://img.shields.io/github/workflow/status/microcompiler/tinyclr-github/Build%20CI?style=flat-square)](https://github.com/microcompiler/tinyclr-github/actions)
 
+This repo contains a sample Visual Studio project leveraging github actions to build and publish TinyCLR OS libraries.  Automated action features include:
+ssss
 * Continious build action
 * Release and publish action
-* [Symbol Packages](https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages-snupkg) allowing an improved debugging experance
+* [Symbol Packages](https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages-snupkg) allowing an improved debugging experience
 * Embedded IntelliSense code-completion file
 * Embedded [Source Link](https://github.com/dotnet/sourcelink/blob/master/README.md) source code debugging
 * Self-contained NuGet Packages include logo and licenses files
