@@ -1,0 +1,77 @@
+name: Build CI
+
+on:
+  push:
+    branches:
+    - master
+    paths: 
+      - '**'
+      - '!.editorconfig'
+      - '!.gitattributes'
+      - '!.gitignore'
+      - '!*.md'
+      - '!LICENSE'
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  CONFIGURATION: 'Release'
+  VERBOSITY:  'Minimal'
+
+jobs: 
+  Build:
+    name: Build TinyCLR    
+    runs-on: [windows-latest]
+    strategy:
+      matrix:
+        dotnet: ['3.1.100']
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Extract build information into variables
+      id: info
+      run: |
+        echo "##[set-output name=build;]$(echo prebuild.$(git rev-list --count HEAD))"
+        echo "##[set-output name=copyright;]$(echo © $(date -u +%Y) Bytewizer.  All rights reserved.)"
+
+    - name: Show build information
+      run: |
+        echo build=${{ steps.info.outputs.build }}
+        echo copyright=${{ steps.info.outputs.copyright }}
+
+    - name: Setup build
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
+      
+    - name: Display dotnet information 
+      run: dotnet --info
+    
+    - name: Restore packages
+      run: dotnet restore --verbosity Minimal
+    
+    - name: Build libraries
+      run: >-
+        dotnet build -p:Copyright="${{ steps.info.outputs.copyright }}"
+        --version-suffix ${{ steps.info.outputs.build }}
+        --no-restore
+        --verbosity ${env:VERBOSITY}
+        --configuration ${env:CONFIGURATION} 
+         
+    - name: Pack build
+      run: >- 
+        dotnet pack -p:Copyright="${{ steps.info.outputs.copyright }}"
+        --version-suffix ${{ steps.info.outputs.build }}
+        --include-symbols 
+        --no-restore 
+        --no-build 
+        --verbosity ${env:VERBOSITY} 
+        --configuration ${env:CONFIGURATION} 
+        --output .builds/artifacts
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: Build
+        path: .builds/artifacts
