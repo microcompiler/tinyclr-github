@@ -49,7 +49,7 @@ jobs:
       run: dotnet --info
     
     - name: Restore packages
-      run: dotnet restore --verbosity Minimal
+      run: dotnet restore --verbosity ${env:VERBOSITY}
     
     - name: Build libraries
       run: >-

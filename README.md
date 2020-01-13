@@ -1,4 +1,4 @@
-# Sample TinyCLR Project
+# Sample Dotnet Core TinyCLR Project
 
 [![Build Status](https://img.shields.io/github/workflow/status/microcompiler/tinyclr-github/Build%20CI?style=flat-square)](https://github.com/microcompiler/tinyclr-github/actions)
 
@@ -20,51 +20,51 @@ This repo contains a sample Visual Studio project leveraging github actions to b
 ## Required CSPROJ file settings
 
 ```xml
+ <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Nuget Pack Properties -->
-    <RuntimeIdentifier>win</RuntimeIdentifier>
+    <TargetFramework>net452</TargetFramework>
+    <FrameworkPathOverride>$(NugetPackagesPath)\.nuget\packages\ghielectronics.tinyclr.core\1.0.0\</FrameworkPathOverride>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GHIElectronics.TinyCLR.Core" Version="1.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
+  </ItemGroup>
+</Project>
+```
+  
+### Required Directory.Build.props file settings
+
+```xml
+  <Project>
+  <!-- Nuget Pack Properties -->
+  <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSymbols>false</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageId>$(AssemblyName)</PackageId>
-    <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Version Condition=" '$(Version)' == '' and '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
-    <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
+    <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version> 
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AssemblyVersion>$(VersionPrefix).0</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).0</FileVersion>
     <Authors>Microcompiler</Authors>
-    <Company>$(AssemblyCompany)</Company>
-    <Description>Simple TinyCLR Cube Library</Description>
-    <PackageTags>TinyCLR, firmware, iot</PackageTags>
-    <PackageProjectUrl>https://github.com/microcompiler/</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/microcompiler/tinyclr</RepositoryUrl>
+    <Company>Bytewizer Inc.</Company>
+    <RepositoryUrl>https://github.com/microcompiler/tinyclr-github</RepositoryUrl>
+    <PackageId>$(AssemblyName)</PackageId>
+    <PackageTags>TinyCLR TinyCLROS</PackageTags>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>logo.png</PackageIcon>
-    <NoWarn>NU5105</NoWarn>
-    <!-- Nuget Pack Properties -->
+    <NoWarn>NU5105</NoWarn>  
   </PropertyGroup>
-    <ItemGroup>
-    <PackageReference Include="GHIElectronics.TinyCLR.Core" Version="1.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.5.0-preview.1.6319">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
+  <!-- Nuget Pack Properties -->
   <!-- Embedded files -->
   <ItemGroup>
-    <None Include="..\..\LICENSE.md" Link="LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)"/>
+    <None Include="..\..\images\logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\images\logo.png">
-      <Pack>True</Pack>
-      <PackagePath>
-      </PackagePath>
-    </None>
-  </ItemGroup>
-  <!-- Embedded files -->
-  ```
-  
+  <!-- Embedded files -->  
+</Project>
+```

@@ -1,7 +1,7 @@
 ﻿// Copyright (c) GHI Electronics, LLC. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace Bytewizer.TinyCLR.Cube
+namespace Bytewizer.TinyCLR.Einstein
 {
     /// <summary>
     /// Vector2 is a 2-element vector.
