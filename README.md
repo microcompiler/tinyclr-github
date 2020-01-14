@@ -1,6 +1,6 @@
 # Sample Dotnet Core TinyCLR Project
 
-[![Build Status](https://img.shields.io/github/workflow/status/microcompiler/tinyclr-github/Build%20CI?style=flat-square)](https://github.com/microcompiler/tinyclr-github/actions)
+[![Build Status](https://img.shields.io/github/workflow/status/microcompiler/tinyclr-github/Build%20CI?style=flat-square&logo=github)](https://github.com/microcompiler/tinyclr-github/actions)
 
 This repo contains a sample Visual Studio project leveraging github actions to build and publish TinyCLR OS libraries.  Automated action features include:
 
