@@ -48,14 +48,14 @@ jobs:
  
     - name: Build libraries
       run: >-
-        dotnet build -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:Version="${{ steps.info.outputs.version }}" 
+        dotnet build -p:BuildNumber="${{ steps.info.outputs.build }}" -p:Version="${{ steps.info.outputs.version }}" 
         --no-restore
         --verbosity ${env:VERBOSITY}
         --configuration ${env:CONFIGURATION} 
         
     - name: Pack libraries
       run: >- 
-        dotnet pack -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:PackageVersion="${{ steps.info.outputs.version }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
+        dotnet pack -p:BuildNumber="${{ steps.info.outputs.build }}" -p:PackageVersion="${{ steps.info.outputs.version }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
         --include-symbols 
         --no-restore 
         --no-build 
