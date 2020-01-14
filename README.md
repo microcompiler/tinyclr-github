@@ -20,7 +20,7 @@ This repo contains a sample Visual Studio project leveraging github actions to b
 ## Required CSPROJ file settings
 
 ```xml
- <Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
     <FrameworkPathOverride>$(NugetPackagesPath)\.nuget\packages\ghielectronics.tinyclr.core\1.0.0\</FrameworkPathOverride>
@@ -28,7 +28,11 @@ This repo contains a sample Visual Studio project leveraging github actions to b
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="GHIElectronics.TinyCLR.Core" Version="1.0.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
 </Project>
 ```
@@ -42,8 +46,6 @@ This repo contains a sample Visual Studio project leveraging github actions to b
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IncludeSymbols>false</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <AssemblyVersion>1.0.6.0</AssemblyVersion>
-    <FileVersion>1.0.6.0</FileVersion>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Version Condition=" '$(Version)' == '' and '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
     <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version> 
@@ -53,18 +55,19 @@ This repo contains a sample Visual Studio project leveraging github actions to b
     <Authors>Microcompiler</Authors>
     <Company>Bytewizer Inc.</Company>
     <RepositoryUrl>https://github.com/microcompiler/tinyclr-github</RepositoryUrl>
+    <BuildNumber Condition=" '$(BuildNumber)' == '' ">0</BuildNumber>
+    <AssemblyVersion>$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
+    <FileVersion>$(VersionPrefix).$(BuildNumber)</FileVersion>
     <PackageId>$(AssemblyName)</PackageId>
     <PackageTags>TinyCLR TinyCLROS</PackageTags>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageIcon>logo.png</PackageIcon>
     <NoWarn>NU5105</NoWarn>  
   </PropertyGroup>
-  <!-- Nuget Pack Properties -->
   <!-- Embedded files -->
   <ItemGroup>
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)"/>
     <None Include="..\..\images\logo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
-  <!-- Embedded files -->  
 </Project>
 ```

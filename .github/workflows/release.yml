@@ -26,11 +26,13 @@ jobs:
       id: info
       run: |
         echo "##[set-output name=version;]$(echo $env:GITHUB_REF.Replace('refs/tags/v',''))"
+        echo "##[set-output name=build;]$(echo prebuild.$(git rev-list --count HEAD))"
         echo "##[set-output name=copyright;]$(echo © $(date -u +%Y) Bytewizer.  All rights reserved.)"    
     
     - name: Show build information
       run: |
         echo version=${{ steps.info.outputs.version }}
+        echo build=${{ steps.info.outputs.build }}
         echo copyright=${{ steps.info.outputs.copyright }}
     
     - name: Setup build
@@ -46,14 +48,14 @@ jobs:
  
     - name: Build libraries
       run: >-
-        dotnet build -p:Version="${{ steps.info.outputs.version }}" 
+        dotnet build -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:Version="${{ steps.info.outputs.version }}" 
         --no-restore
         --verbosity ${env:VERBOSITY}
         --configuration ${env:CONFIGURATION} 
         
     - name: Pack libraries
       run: >- 
-        dotnet pack -p:PackageVersion="${{ steps.info.outputs.version }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
+        dotnet pack -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:PackageVersion="${{ steps.info.outputs.version }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
         --include-symbols 
         --no-restore 
         --no-build 

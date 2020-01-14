@@ -53,7 +53,7 @@ jobs:
     
     - name: Build libraries
       run: >-
-        dotnet build -p:Copyright="${{ steps.info.outputs.copyright }}"
+        dotnet build -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
         --version-suffix ${{ steps.info.outputs.build }}
         --no-restore
         --verbosity ${env:VERBOSITY}
@@ -61,7 +61,7 @@ jobs:
          
     - name: Pack build
       run: >- 
-        dotnet pack -p:Copyright="${{ steps.info.outputs.copyright }}"
+        dotnet pack -p:BuildNumber= "${{ steps.info.outputs.build }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
         --version-suffix ${{ steps.info.outputs.build }}
         --include-symbols 
         --no-restore 

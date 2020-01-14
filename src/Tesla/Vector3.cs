@@ -11,17 +11,17 @@ namespace Bytewizer.TinyCLR.Tesla
         /// <summary>
         /// Gets or sets the X element.
         /// </summary>
-        public double X;
+        public double X { get; set; }
 
         /// <summary>
         /// Gets or sets the Y element.
         /// </summary>
-        public double Y;
-        
+        public double Y { get; set; }
+
         /// <summary>
         /// Gets or sets the Z element.
         /// </summary>
-        public double Z;
+        public double Z { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vector3"/> class.

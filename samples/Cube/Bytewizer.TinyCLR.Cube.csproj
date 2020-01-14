@@ -41,10 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Bytewizer.TinyCLR.Einstein">
-      <Version>1.0.0-prebuild.100</Version>
+      <Version>1.0.0-prebuild.22</Version>
     </PackageReference>
     <PackageReference Include="Bytewizer.TinyCLR.Tesla">
-      <Version>1.0.0-prebuild.100</Version>
+      <Version>1.0.0-prebuild.22</Version>
     </PackageReference>
     <PackageReference Include="GHIElectronics.TinyCLR.BrainPad">
       <Version>1.0.1</Version>
