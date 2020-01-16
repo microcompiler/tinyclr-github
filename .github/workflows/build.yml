@@ -47,25 +47,12 @@ jobs:
       
     - name: Display dotnet information 
       run: dotnet --info
-    
-    - name: Restore packages
-      run: dotnet restore --verbosity ${env:VERBOSITY}
-    
-    - name: Build libraries
-      run: >-
-        dotnet build -p:BuildNumber="${{ steps.info.outputs.build }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
-        --version-suffix prebuild.${{ steps.info.outputs.build }}
-        --no-restore
-        --verbosity ${env:VERBOSITY}
-        --configuration ${env:CONFIGURATION} 
-         
-    - name: Pack build
+      
+    - name: Pack libraries
       run: >- 
         dotnet pack -p:BuildNumber="${{ steps.info.outputs.build }}" -p:Copyright="${{ steps.info.outputs.copyright }}"
-        --version-suffix  prebuild.${{ steps.info.outputs.build }}
-        --include-symbols 
-        --no-restore 
-        --no-build 
+        --version-suffix prebuild.${{ steps.info.outputs.build }}
+        --include-symbols
         --verbosity ${env:VERBOSITY} 
         --configuration ${env:CONFIGURATION} 
         --output .builds/artifacts
